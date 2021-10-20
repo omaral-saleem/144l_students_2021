@@ -1,0 +1,57 @@
+---
+title: "2021_abundance_demo"
+author: "Omar Al-Saleem"
+date: "10/20/2021"
+output: github_document
+---
+# Goal
+
+This document shows how **individual bottle** bacterial abundance data from 2021 remineralization expierments were processed, QC'd and analyzed. It also provides an intro to data processing and analysis with Rstudio and R markdown.
+
+#Intro to R markdown
+Load packages that we'll need to analyze our data.
+```{r Load Packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+```
+
+#Import data
+
+```{r}
+excel_sheets("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx")
+
+metadata <- read_excel("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet="Metadata")
+
+glimpse(metadata)
+#unique(metadata$Bottle)
+#unique(metadata$Treatment)
+
+data <- read_excel("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet="Data")
+
+joined<- left_join(metadata, data)#attach data to metadata which will join the right dataset to the left one by using variables that are the same across the two dataframes
+glimpse(joined)
+```
+
+#Prepare The Data
+
+we will convert the Data and Time values from characters to dates by adding columns with the time elapsed for each treatment, and convert to cells/L because it will match up with the TOC data later. Also, we will sbset the data for variables of interest and drop the NA values.
+
+to do this, we will use the pipe operator "%>%", which basically says like "first do one thing to the data. THEN, do this other thing." (with the %>% operator taking the place of the word THEN in this scenario). Every call that we invoke with an additional pipe is going to take place on the variable (dataframe) that we specify at the beginning.
+
+```{r message=FALSE, warning=FALSE}
+cells <- joined %>%
+  mutate(Datetime= ymd_hm(Datetime), #splits apart Datetime as specified
+  all_cells_L = as.numeric(all_cells_uL) *1000000) %>%
+  group_by(Treatment, Bottle) %>%
+  mutate(interv=interval(first(Datetime), Datetime),
+         s = as.numeric(interv),
+         hours = s/3600,
+         days = hours/24) %>%
+  ungroup() %>%
+  select(Experiment:DNA_Sample, all_cells_L, hours, days) %>%
+  drop_na(all_cells_L)
+glimpse(cells)
+
+```
+
