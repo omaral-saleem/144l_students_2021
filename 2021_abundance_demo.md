@@ -6,7 +6,7 @@ Omar Al-Saleem
 # Goal
 
 This document shows how **individual bottle** bacterial abundance data
-from 2021 remineralization expierments were processed, QC’d and
+from 2021 remineralization experiments were processed, QC’d and
 analyzed. It also provides an intro to data processing and analysis with
 Rstudio and R markdown.
 
