@@ -4,7 +4,7 @@ author: "Omar Al-Saleem"
 date: "10/20/2021"
 output: github_document
 ---
-# Goal
+# Goal 
 
 This document shows how **individual bottle** bacterial abundance data from 2021 remineralization experiments were processed, QC'd and analyzed. It also provides an intro to data processing and analysis with Rstudio and R markdown.
 
