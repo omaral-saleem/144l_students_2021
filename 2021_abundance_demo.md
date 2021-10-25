@@ -58,11 +58,6 @@ glimpse(metadata)
 data <- read_excel("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet="Data")
 
 joined<- left_join(metadata, data)#attach data to metadata which will join the right dataset to the left one by using variables that are the same across the two dataframes
-```
-
-    ## Joining, by = c("Bottle", "Timepoint")
-
-``` r
 glimpse(joined)
 ```
 
@@ -162,8 +157,6 @@ cells %>%
   scale_color_manual(values = custom.colors) +
   scale_fill_manual(values = custom.colors)
 ```
-
-    ## Warning: Removed 40 rows containing missing values (geom_text).
 
 ![](2021_abundance_demo_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
@@ -657,8 +650,6 @@ ln_cells %>%
   facet_wrap("Bottle" , ncol =2) +
   theme_bw()
 ```
-
-    ## Warning: Removed 40 rows containing missing values (geom_text).
 
 ![](2021_abundance_demo_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
