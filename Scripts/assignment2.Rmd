@@ -20,20 +20,20 @@ library(lubridate)
 ```{r}
 #make sure to update the filepaths for your own locally-stored repository! 
 
-excel_sheets("~/Documents/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx")
+excel_sheets("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx")
 
 #Mac: to make an arrow, use Option + - 
 
-metadata <- read_excel("~/Documents/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet = "Metadata")
+metadata <- read_excel("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet = "Metadata")
 
 glimpse(metadata)
 #unique(metadata$Bottle)
 #unique(metadata$Treatment)
 
-dapi_data <- read_excel("~/Documents/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet = "DAPI_Data")
+dapi_data <- read_excel("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet = "DAPI_Data")
 glimpse(dapi_data)
 
-toc_data <- read_excel("~/Documents/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet = "TOC_Data")
+toc_data <- read_excel("~/Desktop/github/144l_students_2021/Input_Data/week4/144L_2021_BactAbund.xlsx", sheet = "TOC_Data")
 glimpse(toc_data)
 
 dapi_metadata <- metadata %>%
@@ -97,7 +97,7 @@ glimpse(cells)
 ```
 Q1: What differences between the treatments do you observe? Does this make sense in the context of the oxygen drawdown data (pictured below)?
 
-A1: 
+A1: All treatments sated around the same amount of abundance. As time goes on each treatment reacts differently. The control treatment had a linear growth. the kelp exudate had a more increase than the control treatment but it has a little reduce in day 2 then it increased and both that treatment and the control ended up around the same amount of cell abundance. The kelp Exudate and nutrients treatment had the most increase in the cell abundance by the end but it also had a little reduce around day 2. Last;ey, the glucose treatment started with very rapid increase in the cell abundance compared to others but it was the only treatment that showed a noticeable decreases in the abundance of the cells after day 2.
 
 Oxygen Drawdown: 
 ![](EEMB144_remin_autoBOD.png)
@@ -124,7 +124,7 @@ glimpse(cells)
 ```
 Q2: What differences do you notice between the cell abundance data and the cell biovolume data across each treatment? 
 
-A2: 
+A2: the biovolume only had an increase for the kelp and nutrients treatment. biovolume showed that all experiment had a rapid growth until day 2 then decreased to almost where it started at day 0 except the kelp and nutrients treatment. The cell abundance data only showed a decrease in the glucose treatment where the cell biovoulme data shows a decrease in all treatments at different levels.
 
 # Next Steps 
 
@@ -180,7 +180,7 @@ A: Between 0-2 days for all bottles. (T0 - T4)
 
 Q3: What are the limitations of using the DAPI data (only 3 timepoints) instead of the FCM data? Hint: Think about this question in terms of bacterial growth curves, and which phase of growth we need in order to calculate specific growth rates. 
 
-A3:
+A3: the limitations is that we cant account the lag phase because we only have three time points.
 
 ## Calculate growth rates, doubling times, and ∆cell abundances using cell abundance data (cells/L)
 
@@ -240,7 +240,7 @@ glimpse(bactcarbon)
 
 #update this filepath to match your own repository 
 #save your data to a .csv 
-write.csv(bactcarbon, "~/Documents/144l_students_2021/Output_Data/week6/211101_dapi_data_calculations.csv")
+write.csv(bactcarbon, "~/Desktop/github/144l_students_2021/Output_Data/week6/211101_dapi_data_calculations.csv")
 
 #normally we would do this for the individual bottles and then calculate averages, but can't do that here since we have data from combined bottles 
 
@@ -260,7 +260,7 @@ trt_ba <- bactcarbon %>%
 
 trt_ba
 
-saveRDS(trt_ba, "~/Documents/144l_students_2021/Output_Data/week6/144L_trt_ba_plot.rds")
+saveRDS(trt_ba, "~/Desktop/github/144l_students_2021/Output_Data/week6/144L_trt_ba_plot_rds")
 ```
 
 ```{r fig.height=4, fig.width=6}
@@ -275,12 +275,12 @@ trt_ba_biovol <- bactcarbon %>%
 
 trt_ba_biovol
 
-saveRDS(trt_ba_biovol, "~/Documents/144l_students_2021/Output_Data/week6/144L_trt_ba_biovol_plot.rds")
+saveRDS(trt_ba_biovol, "~/Desktop/github/144l_students_2021/Output_Data/week6/144L_trt_ba_biovol_plot.rds")
 ```
 
 Q4: How do the bacterial carbon values change when we account for changes in cell biovolume as the experiment progresses? 
 
-A4: 
+A4: the values of the kelp exudate treatment decreased while the values of the kelp exudate and nutrients treatment increased. However, the values fot the glucose and control treatments remained the same when we account for changes in cell biovolume.
 
 ## Barplots
 
@@ -343,12 +343,12 @@ delta_cells + mew + doubling + plot_annotation(tag_levels = "a") +plot_layout(nc
 
 Q5: Do the patterns you see in the ∆Cells, specific growth rate (u), and doubling time line up with our previous observations of cell abundance? How about with the oxygen drawdown data?
 
-A5: 
+A5: yes, all the patterns line up with the previous observations of the cell abundance including the oxygen grawndown data.
 
 # Save Data 
 
 ```{r}
-saveRDS(bactcarbon, "~/Documents/144l_students_2021/Output_Data/week6/144L_Exp_Processed_BactAbund.rds")
+saveRDS(bactcarbon, "~/Desktop/github/144l_students_2021/Output_Data/week6/144L_Processed_BactAbund.rds")
 ```
 
 # Incorporate TOC data
@@ -377,10 +377,10 @@ Q6: a) What was our target concentration of carbon to add to each treatment?
     c) What does this imply about our ability to assess the effect of the **type** of DOC added?
     d) What happens to TOC over time in the incubations and does this align with our other data?
 
-A6: a) 
-    b)
-    c) 
-    d) 
+A6: a) 10 umol cL^-1
+    b) no, only in the Glucose treatment
+    c) we cant say how the different types of DOC will affect the TOC concentration
+    d) TOC decreases overtime which aligns with the other data because the carbon is being used overtime and respired as co2.
 
 ## Calculate DOC, ∆DOC, Bioavailable DOC Fraction, and Bacterial Growth Efficiency (BGE)
 ```{r}
@@ -482,4 +482,4 @@ deldoc / deldoc_bv / bioav / bioav_bv / bge / bge_bv + plot_annotation(tag_level
 ```
 Q7: How does incorporating biovolume change (or not change) your interpretation of the ∆DOC, Bioavaliable DOC, and BGE values? Provide 1-2 sentences for each comparison (a vs. b,c vs. d & e vs. f)
 
-A7: 
+A7: the biovolume change doesnt seem to have interpretation of the ∆DOC nor the bioavaliable DOC. However, there is an increases in the BGE when you account for the biovolume which means that not taking the biovolume data can underestimates the BGE.
